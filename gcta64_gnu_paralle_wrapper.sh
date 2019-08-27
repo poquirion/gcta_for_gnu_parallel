@@ -73,7 +73,7 @@ move_locally () {
 
 file_input=filtered_unrelated_chr${chr}
 tmp_dir=$(echo ${GCTA_FULL_UREL_DIR} | tr '/' '_')
-tmp_dir=${SLURM_TMPDIR}/${tmp_dir}_${file_name} 2>/dev/null
+tmp_dir=${SLURM_TMPDIR}/${tmp_dir}_${file_input} 2>/dev/null
 
 move_locally ${GCTA_FULL_UREL_DIR}  $tmp_dir $file_input
 
