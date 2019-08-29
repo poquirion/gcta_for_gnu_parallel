@@ -1,15 +1,15 @@
 #!/bin/bash
 
-export GCTA_BASEDIR=${GCT_BASEDIR=/lustre03/project/6004777/projects/uk_biobank/GCTA/GTEx2_data_june_2019/lustre03/project/6004777/projects/uk_biobank/GCTA/GTEx2_data_june_2019/}
+export GCTA_BASEDIR=${GCT_BASEDIR:=/lustre03/project/6004777/projects/uk_biobank/GCTA/GTEx2_data_june_2019/}
 
 
-export GCTA_FULL_UREL_DIR=${GCT_FULL_UREL_DIR=/lustre03/project/6004777/projects/uk_biobank/GCTA/full_unrel/}
+export GCTA_FULL_UREL_DIR=${GCT_FULL_UREL_DIR:=/lustre03/project/6004777/projects/uk_biobank/GCTA/full_unrel/}
 
 
 usage () {
 
 cat  << EO_MARCUS_MAIL
-  $0  <tissue> <chr> <ma_file> <outname>
+  $0  <tissue> <chr> <ma_file> <outname> 
   tissue = Tissue name
   chr = chromosome
   ma_file = table with conditioning variants
@@ -80,7 +80,7 @@ cat << TRUITE
 ${GCTA_BIN} \
   --bfile ${tmp_dir}/${file_input} \
   --extract ${GCTA_BASEDIR}/${tissue}/snplist_files/snplist_${ma_file} \
-  --thread 1 \
+  --threads 1 \
   --maf 0.01 \
   --cojo-file ${GCTA_BASEDIR}/${tissue}/${ma_file} \
   --cojo-slct \
@@ -92,7 +92,7 @@ mkdir -p ${GCTA_BASEDIR}/${tissue}/out
 ${GCTA_BIN} \
    --bfile ${tmp_dir}/${file_input} \
   --extract ${GCTA_BASEDIR}/${tissue}/snplist_files/snplist_${ma_file} \
-  --thread $SLURM_CPUS_PER_TASK \
+  --threads 1 \
   --maf 0.01 \
   --cojo-file ${GCTA_BASEDIR}/${tissue}/${ma_file} \
   --cojo-slct \
