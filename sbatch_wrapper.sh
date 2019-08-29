@@ -6,6 +6,6 @@ for chr in test.dat; do
 
   export chr
   echo $chr
-  # parallel_wrapper.sh
+  sbatch parallel_wrapper.sh
 
 done

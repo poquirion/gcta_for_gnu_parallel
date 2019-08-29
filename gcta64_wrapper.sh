@@ -35,7 +35,7 @@ outname=$4
 
 
 
-GCTA_BIN=~/bin/gcta/gcta_1.92.0beta6/gcta64
+GCTA_BIN=/lustre03/project/6004777/projects/uk_biobank/GCTA/gcta64
 
 
 move_locally () {
@@ -80,11 +80,14 @@ cat << TRUITE
 ${GCTA_BIN} \
   --bfile ${tmp_dir}/${file_input} \
   --extract ${GCTA_BASEDIR}/${tissue}/snplist_files/snplist_${ma_file} \
-  --thread $SLURM_CPUS_PER_TASK \
+  --thread 1 \
   --maf 0.01 \
   --cojo-file ${GCTA_BASEDIR}/${tissue}/${ma_file} \
-  --cojo-slct
+  --cojo-slct \
+  --out ${GCTA_BASEDIR}/${tissue}/out/${outname}
 TRUITE
+
+mkdir -p ${GCTA_BASEDIR}/${tissue}/out
 
 ${GCTA_BIN} \
    --bfile ${tmp_dir}/${file_input} \
@@ -92,5 +95,6 @@ ${GCTA_BIN} \
   --thread $SLURM_CPUS_PER_TASK \
   --maf 0.01 \
   --cojo-file ${GCTA_BASEDIR}/${tissue}/${ma_file} \
-  --cojo-slct
+  --cojo-slct \
+  --out ${GCTA_BASEDIR}/${tissue}/out/${outname}
 
